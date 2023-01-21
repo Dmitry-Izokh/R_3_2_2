@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace R_3_2_2
             UIDocument uidoc = uiapp.ActiveUIDocument;
             Document doc = uidoc.Document;
 
-            List<FamilyInstance> fInstances = new FilteredElementCollector(doc, doc.ActiveView.Id)
+            List<Pipe> fInstances = new FilteredElementCollector(doc, doc.ActiveView.Id)
             .OfCategory(BuiltInCategory.OST_PipeCurves)
             .WhereElementIsNotElementType()
-            .Cast<FamilyInstance>()
+            .Cast<Pipe>()
             .ToList();
 
             TaskDialog.Show("Количество труб", fInstances.Count.ToString());
